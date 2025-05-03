@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@expo/metro-runtime": "~4.0.1",
+    "expo": "^52.0.46",
+    "react-native-web": "~0.19.13",
+    "react-dom": "18.3.1"
+  }
+}
