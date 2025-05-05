@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-import Capa from './capa.png';
+import Capa from './assets/capa.png';
 
 export default function App() {
   return (
