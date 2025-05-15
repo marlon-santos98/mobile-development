@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   },
   nome: {
     fontWeight: 'bold',
-    padding: 10
+    padding: 10,
+    fontSize: 20,
   },
   texto: {
     textAlign: 'center'
