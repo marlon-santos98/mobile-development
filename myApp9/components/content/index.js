@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 //import Filme from '../../assets/Filme.png';
-import estilos from './styles';
+import estilos from './styles ';
 
 export default function Conteudo() {
   return (
