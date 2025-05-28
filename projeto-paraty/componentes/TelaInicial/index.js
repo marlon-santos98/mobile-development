@@ -1,42 +1,35 @@
-import React from "react";
 import { View, Text, Image, Button } from "react-native";
-import { StyleSheet } from "react-native";
 
 import paraty from '../../assets/01.png'
 
+import styles from './estilos';
+
 export default function TelaInicial(props){
     return(
-            <View>
-                <View style={styles.container}>
-                    <Text>Paraty</Text>
-                    <Text>Saiba o que visitar em Paraty.</Text>
-                    <Image source={paraty}/>
+            <View style={styles.container}>
+                <View style={styles.card}>
+                <View style={[styles.textCard]}>
+                    <Text  style={[styles.text1]}>Paraty</Text>
+                    <Text  style={[styles.text]}>Saiba o que visitar em Paraty.</Text>
                 </View>
-                <View>
+                <Image
+                    source={paraty}
+                    style={{ width: 230, height: 200}}/>
+                <View style={styles.title}>
                     <Button
                         title="Ver Restaurantes"
                         onPress={() => props.navigation.navigate('TelaRestaurantes')}
                     />
-                </View>
-                <View>
                 <Button
                     title="Ver Hospedagem"
                     onPress={() => props.navigation.navigate('TelaHospedagem')}
                 />
-                </View>
-                <View>
                 <Button
                     title="Ver Passeios"
                     onPress={() => props.navigation.navigate('TelaPasseios')}
                 />
                 </View>
+                </View>
             </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-between',
-    }
-})
