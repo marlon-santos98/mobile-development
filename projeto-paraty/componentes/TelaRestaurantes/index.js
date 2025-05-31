@@ -1,4 +1,5 @@
 import { View, Text, Image } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import styles from "./estilos";
 
@@ -9,7 +10,7 @@ import img3 from '../../assets/restaurantes/restaurante03.png'
 
 export default function TelaRestaurante(){
     return(
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
         <View>
             <Text style={[styles.title]}>Bares e Restaurantes</Text>
             <Text style={[styles.content]}>O prazer da boa comida você encontra em Paraty.
@@ -34,6 +35,6 @@ export default function TelaRestaurante(){
             <Text>Localização Rua do Comércio</Text>
             </View>
         </View>
-        </View>
+        </ScrollView>
     )
 }
