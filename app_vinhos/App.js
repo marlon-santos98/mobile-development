@@ -34,6 +34,7 @@ export default function App() {
         tabBarActiveTintColor: '#fff',
         tabBarInactiveTintColor: "#ab887c",
         tabBarActiveBackgroundColor: "#400303",
+        
       }}>
         <Abas.Screen
           name="Início"
