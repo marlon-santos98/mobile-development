@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {Entypo, AntDesign, Ionicons } from "@expo/vector-icons"
+import {Entypo, AntDesign, FontAwesome5   } from "@expo/vector-icons"
 
 import TelaInicio from './componentes/TelaInicio';
 import TelaSobre from './componentes/TelaSobre';
@@ -24,12 +24,10 @@ export default function App() {
           fontWeight: 'bold'
         },
         
-        headerTitleAlign: 'center',
-        tabBarActiveTintColor: '#ba171',
-        tabBarInactiveTintColor: '#000',
-        tabBarActiveBackgroundColor: "fff",
-        tabBarInactiveBackgroundColor: '#eecb01'
-
+        tabBarActiveTintColor: '#ba171a',
+        tabBarInactiveTintColor: "#000",
+        tabBarActiveBackgroundColor: "#fff",
+        tabBarStyle: { backgroundColor: "#eecb01"},
       }
       }>
         <Abas.Screen 
@@ -54,9 +52,9 @@ export default function App() {
         name='Vitórias' 
         component={TelaVitorias}
         options={{
-          tabBarIcon: ({color}) => {
-            <Ionicons name="trophy-sharp" size={20} color={color} />
-          }
+          tabBarIcon: ({color}) => (
+            <FontAwesome5 name="trophy" color={color} size={20} />
+          )
         }}
         />
       </Abas.Navigator>
