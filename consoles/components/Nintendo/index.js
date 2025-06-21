@@ -1,5 +1,6 @@
 import React from 'react'
-import {ScrollView , Text} from 'react-native'
+import {ScrollView} from 'react-native'
+import estilos from "../../assets/estilos/estilos"
 
 import Jogo from "./jogo"
 import Historia from './historia'
@@ -9,7 +10,7 @@ import Conclusao from './conclusao'
 
 export default function Nintendo(){
     return(
-        <ScrollView >
+        <ScrollView  style={estilos.container}>
             <Historia/>
             <Especificacoes/>
             <Jogo/>
