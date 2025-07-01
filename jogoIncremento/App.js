@@ -1,19 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+
+import azul from "./assets/blue.jpg";
+import verde from "./assets/green.jpg";
 
 import Pontos from "../jogoIncremento/componentes/Pontos/index";
 
 export default function App() {
   return (
-    <Pontos/>
+    <SafeAreaView>
+      <View>
+          <Pontos Fundo={azul} rotacao={180} cor="azul"/>
+          <Pontos Fundo={verde} rotacao={0} cor="verde"/>
+      </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
