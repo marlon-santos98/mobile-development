@@ -13,8 +13,18 @@ const TelaInicial = () => {
   return (
     <View style={estilo.tela}>
       <Text style={estilo.titulo}>
-        Toque no botão e veja quem é o vencedor de 1 à 100
+        Escolha os valores mínimo e máximo para fazer o sorteio
       </Text>
+
+      <View style={estilo.linhaInput}>
+        <Text>Valor mínimo: </Text>
+        <TextInput style={estilo.inputNormal}></TextInput>
+      </View>
+
+      <View style={estilo.linhaInput}>
+        <Text>Valor máximo: </Text>
+        <TextInput style={estilo.inputNormal}></TextInput>
+      </View>
 
       <View style={estilo.boxNumero}>
         <Text style={estilo.numero}>{numeroSorteado}</Text>
