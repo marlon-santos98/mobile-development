@@ -1,14 +1,37 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
 import estilo from './estilo';
 
 const TelaInicial = () => {
   const [ numeroSorteado, setNumeroSorteado ] = useState(0);
+  const [flagInputFocus, setFlagInputFocus] = useState("")
+  const [ValorMinimo, setValorMinimo] = useState(0)
+  const[valorMaximo, setValorMaximo] = useState(10)
+
+    const validarCampos = (minimo, maximo) => {
+    if(isNaN(minimo) || isNaN(maximo)){
+      alert("Digite os valores")
+      return false
+    }
+    if(minimo > maximo){
+      alert("O valor mínimo deve ser menor que o valor máximo")
+      return false
+    }
+    return true
+  }
 
   const gerarNumero = () => {
-    const novoNumero = Math.floor(Math.random() * 100 + 1);
-    setNumeroSorteado(novoNumero);
+    const min = parseInt(ValorMinimo)
+    const max = parseInt(valorMaximo)
+
+    if(!validarCampos(min, max)){
+      return
+    }
+    const novoNumero = Math.floor(Math.random() * (max + 1 - min) + min)
+    setNumeroSorteado(novoNumero)
   }
+
+
 
   return (
     <View style={estilo.tela}>
@@ -18,12 +41,31 @@ const TelaInicial = () => {
 
       <View style={estilo.linhaInput}>
         <Text>Valor mínimo: </Text>
-        <TextInput style={estilo.inputNormal}></TextInput>
+        <TextInput 
+        textAlign='center'
+        keyboardType='number-pad'
+        maxLength={5}
+        autoFocus={true}
+        style = { flagInputFocus === "txt_min" ? estilo.inputFocus : estilo.inputNormal }
+        onFocus={()=>setFlagInputFocus("txt_min")}
+        onBlur={()=>setFlagInputFocus("")}
+        value={ValorMinimo.toString()}
+        onChangeText={valor => setValorMinimo(valor)}
+        />
       </View>
 
       <View style={estilo.linhaInput}>
         <Text>Valor máximo: </Text>
-        <TextInput style={estilo.inputNormal}></TextInput>
+        <TextInput 
+        textAlign='center'
+        keyboardType='number-pad'
+        maxLength={5}
+        style = { flagInputFocus === "txt_max" ? estilo.inputFocus : estilo.inputNormal }
+        onFocus={()=>setFlagInputFocus("txt_max")}
+        onBlur={()=>setFlagInputFocus("")}
+        value={valorMaximo.toString()}
+        onChangeText={setValorMaximo}
+        />
       </View>
 
       <View style={estilo.boxNumero}>
