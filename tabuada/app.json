@@ -18,7 +18,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.devup.desafiotabuada",
+      " ": "com.devup.desafiotabuada",
       "versionCode": 1
     },
     "web": {
