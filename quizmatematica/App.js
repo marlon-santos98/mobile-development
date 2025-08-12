@@ -1,38 +1,22 @@
-import { useFonts, Annie_UseYourTelescope_400Regular } from '@expo-google-fonts/annie-use-your-telescope';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import Inicio from "./componentes/TelaInicio";
+import Quiz from "./componentes/Quiz";
 
-const [loaded] = useFonts({
-  Annie_UseYourTelescope_400Regular,
-});
+const Navegacao = createStackNavigator();
 
-  if (!loaded) {
-    return <View style={styles.container}><Text>Carregando fonte...</Text></View>;
+export default function App(){
+
+  {  
+    return(
+        <NavigationContainer >
+          <Navegacao.Navigator>
+            <Navegacao.Screen name="Início" component = { Inicio } />
+            <Navegacao.Screen name="Quiz" component = { Quiz } />
+          </Navegacao.Navigator>
+        </NavigationContainer>
+    );
   }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.textoQuadro}>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textoQuadro: {
-    fontFamily: "Annie_UseYourTelescope_400Regular",
-    fontSize: 48,
-    color: 'white',
-    textAlign: 'center',
-    lineHeight: 65
-  }
-});

@@ -1,23 +1,30 @@
-import React from "react";
-import { useFonts, AnnieUseYourTelescope } from "expo-google-fonts/dev";
-import estilos from "../../estilos"
-import { useFonts, Annie_UseYourTelescope_400Regular } from '@expo-google-fonts/annie-use-your-telescope';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, Image, ImageBackground, Pressable } from 'react-native';
 
-export default function TelaInicio() {
-const [loaded] = useFonts({
-  Annie_UseYourTelescope_400Regular,
-});
+import estilos from '../Quiz/estilos';
 
-  if (!loaded) {
-    return <View style={styles.container}><Text>Carregando fonte...</Text></View>;
-  }
+import background from '../../assets/background.png';
+import btn_iniciar from '../../assets/btn_iniciar.png';
 
-  return(
-    <View>
-        <Text>Tela Inicio</Text>
-    </View>
-  )
+//Constante com o texto mostrado na tela inicial
+const mensagem = "Quiz de\nMatemática";
+
+export default function Inicio(props) {
+
+    //Função para navegar para o Quiz ao clicar no botão Iniciar
+    const iniciarQuiz = () => {
+        props.navigation.navigate('Quiz');
+    }
+
+  return (
+    <ImageBackground style={estilos.fundo} source={background}>
+      <View style={estilos.quadro}>
+        <Text style={estilos.textoQuadro}>{mensagem}</Text>
+      </View>
+      <View style={estilos.areaBotoes}>
+        <Pressable style={estilos.botao} onPress={iniciarQuiz}>
+          <Image source={btn_iniciar} />
+        </Pressable>
+      </View>
+    </ImageBackground>
+  );
 }
-
-
