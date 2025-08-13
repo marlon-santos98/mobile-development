@@ -9,7 +9,7 @@ import btn_iniciar from '../../assets/btn_iniciar.png';
 const mensagem = "Quiz de\nMatemática";
 
 export default function Inicio(props) {
-
+\\
     //Função para navegar para o Quiz ao clicar no botão Iniciar
     const iniciarQuiz = () => {
         props.navigation.navigate('Quiz');
