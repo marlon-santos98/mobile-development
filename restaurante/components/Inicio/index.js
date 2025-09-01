@@ -1,43 +1,48 @@
-import { useState } from "react";
-import { Text, View, ScrollView , Image, TextInput} from "react-native";
-import estilo from "./estilo"
+import React, { useState } from 'react';
+import { Image, ScrollView, Text, TextInput, View } from 'react-native';
+import styles from './styles';
+import ItemCardapio from '../ItemCardapio';
+import logo from '../../assets/logo.png';
+import { buscaItemCardapio, filtroSugestoes } from '../../servicos/buscaFiltro';
 
-import logo from "../../assets/logo.png"
-import cardapio from "../../dados/cardapio";
+export default function Inicio () {
 
-export default function Inicio(){
+    const [titulo, setTitulo] = useState("Sugestões")
+    const [termo, setTermo] = useState();
 
-    const [busca, setBusca] = useState()
-    const [sugestao, setSugestao] = useState(cardapio)
+    const [cardapioLista, setCardapioLista] = useState(filtroSugestoes())
 
-    return(
-        <ScrollView style={estilo.container}>
-            <View style={estilo.imgView}>
-                <Image source={logo} style={estilo.img}/>
-                <Text style={estilo.title}>CARDÁPIO JAPONÊS</Text>
+    function handleSearch(termoDigitado) {
+        if(termoDigitado.length > 2)
+        {
+            const buscaLista = buscaItemCardapio(termoDigitado)
+
+            setCardapioLista(buscaLista);
+            setTitulo("Você buscou por: "+termoDigitado)
+        }
+        else
+        {
+            setCardapioLista(filtroSugestoes())
+            setTitulo("Sugestões")
+        }
+        setTermo(termoDigitado);
+    }
+
+    return (
+        <View style={styles.Container}>
+            <View style={styles.LogoArea}>
+                <Image style={styles.logo} source={logo} />
+                <Text style={styles.logoText}>Cardápio Japonês</Text>
             </View>
-            <TextInput
-                style={estilo.input}
-                placeholder="O que você procura?"
-                value={busca}
-            />
+            <TextInput onChangeText={(termoDigitado) => handleSearch(termoDigitado)} value={termo} placeholder='O que você procura?' style={styles.busca} />
+            <Text style={styles.titulo}>{titulo}</Text>
+            <ScrollView>
             {
-                
-                cardapio
-                .filter((prato) => prato.pratoSugerido)
-                .map((prato) => (
-                    <View key={prato.nome}>  
-                        <View  style={estilo.card}>
-                            <Image source={prato.imagem} style={estilo.cardImg}/>
-                            <View style={estilo.cardText}>
-                                <Text style={estilo.titleText}>{prato.nome}</Text>
-                                <Text style={estilo.textoCard}>{prato.descricao}</Text>
-                            </View>
-                        </View>
-                    </View>
+                cardapioLista.map((produto, index) => (
+                    <ItemCardapio key={index} nome={produto.nome} descricao={produto.descricao} imagem={produto.imagem} />
                 ))
-                }
-            
-        </ScrollView>
+            }
+            </ScrollView>
+        </View>
     )
 }

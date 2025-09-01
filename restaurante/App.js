@@ -14,13 +14,15 @@ export default function App() {
     <NavigationContainer>
       <Aba.Navigator screenOptions={screenOptions}>
         <Aba.Screen name="Inicio" component={Inicio}/>
-        <Aba.Screen name="Roll" component={Inicio}/>
-        <Aba.Screen name="Sushi" component={Inicio}/>
-        <Aba.Screen name="Yakitori" component={Inicio}/>
-        <Aba.Screen name="Yakisoba" component={Inicio}/>
-        <Aba.Screen name="Sashimi" component={Inicio}/>
-        <Aba.Screen name="Temaki" component={Inicio}/>
-        <Aba.Screen name="Cogumelo" component={Inicio}/>
+        <Aba.Screen name="Roll" component={Categoria} initialParams={{categoria: "roll"}} />
+        <Aba.Screen name="Sushi" component={Categoria} initialParams={{categoria: "sushi"}} />
+        <Aba.Screen name="Yakitori" component={Categoria} initialParams={{categoria: "yakitori"}} />
+        <Aba.Screen name="Yakisoba" component={Categoria} initialParams={{categoria: "yakisoba"}} />
+        <Aba.Screen name="Sashimi" component={Categoria} initialParams={{categoria: "sashimi"}} />
+        <Aba.Screen name="Temaki" component={Categoria} initialParams={{categoria: "temaki"}} />
+        <Aba.Screen name="Cogumelos" component={Categoria} initialParams={{categoria: "cogumelos"}} />
+        <Aba.Screen name="Gyoza" component={Categoria} initialParams={{categoria: "gyoza"}} />
+        <Aba.Screen name="Tempura" component={Categoria} initialParams={{categoria: "tempura"}} />
       </Aba.Navigator>
     </NavigationContainer>
   );

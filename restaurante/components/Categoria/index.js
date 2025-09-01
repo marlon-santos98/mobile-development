@@ -1,18 +1,24 @@
-import { Text, View, ImageBackground, ScrollView } from "react-native";
-import estilo from "./estilo"
+import React from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import styles from './styles';
+import ItemCardapio from '../ItemCardapio';
+import { filtroCategoria } from '../../servicos/buscaFiltro';
 
-import {filtroSugestao} from "../../servico/index"
+export default function Categoria ({ route }) {
 
-export default function Categorias({route, nome, descricao, imagem}){
+    const categoria = route.params.categoria;
+    const produtosCategoria = filtroCategoria(categoria);
 
-    const categoria = route.params.categoria
-    const produtosCategoria = filtroCategoria(categoria)
-
-    return(
-        <ScrollView style={estilo.container}>
-            <Image source={imagem}/>
-            <Text>{nome}</Text>
-            <Text>{descricao}</Text>
-        </ScrollView>
+    return (
+        <View style={styles.Container}>
+            <Text style={styles.titulo}>{categoria}</Text>
+            <ScrollView>
+                {
+                    produtosCategoria.map((produto, index) => (
+                        <ItemCardapio key={index} imagem={produto.imagem} nome={produto.nome} descricao={produto.descricao} />
+                    ))
+                }
+            </ScrollView>
+        </View>
     )
 }

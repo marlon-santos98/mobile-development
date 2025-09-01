@@ -1,60 +1,43 @@
 import { StyleSheet } from "react-native";
 
-const estilo = StyleSheet.create({
-    container: {
-        backgroundColor: '#f11635'
+const styles = StyleSheet.create({
+    Container: {
+        backgroundColor: '#f11635',
+        height: '100%',
+        paddingTop: 10,
+        paddingHorizontal: 20
     },
-    img:{
-        width: 90,
+    LogoArea: {
+        width: '100%',
+        height: 100,
+    },
+    logo: {
+        width: 92,
         height: 80,
-    },
-    imgView:{
-        width: 300,
-        alignItems: 'center',
-        marginTop: 50
-    },
-    title:{
-        padding: 20
-    },
-    input:{
-        backgroundColor: '#fff',
-        height: 48,
-        borderRadius: 30,
-        width: 280,
-        marginLeft: 18,
-        padding: 15
-    },
-    cardImg:{
-        width: 90,
-        height: 90,
-        borderRadius: 20
-    },
-    card: {
-        backgroundColor: '#eee1e1ff',
+        left: -10,
         marginBottom: 10,
-        marginVertical: 30,
-        marginHorizontal: 10,
-        borderRadius: 30,
-        flexDirection: 'row',
+        alignSelf: 'center'
     },
-    textoCard:{
-        flexShrink: 1,
-        flexWrap: 'wrap',
-        maxWidth: 190,
-        fontSize: 10
+    logoText: {
+        fontSize: 14,
+        color: '#ffffff',
+        textTransform: 'uppercase',
+        textAlign: 'center',
     },
-    cardText:{
-        backgroundColor: '#fff',
-        marginLeft: 10,
-        borderRadius: 20,
-        padding: 8,
-        width: 200,
-        marginVertical: 10
+    busca: {
+        backgroundColor: '#ffffff',
+        borderRadius: 50,
+        width: '100%',
+        height: 50,
+        paddingHorizontal: 24,
+        marginTop: 25,
     },
-    titleText:{
-        fontSize: 15,
-        fontWeight: 'bold'
+    titulo: {
+        fontSize:26,
+        textAlign: 'center',
+        color: '#ffffff',
+        marginVertical: 12
     }
 })
 
-export default estilo
+export default styles;
