@@ -4,6 +4,7 @@ import styles from './styles';
 import ItemCardapio from '../ItemCardapio';
 import { filtroCategoria } from '../../servicos/buscaFiltro';
 
+
 export default function Categoria ({ route }) {
 
     const categoria = route.params.categoria;
