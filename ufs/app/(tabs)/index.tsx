@@ -1,26 +1,39 @@
-import React, { use, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Text, View, ScrollView } from "react-native";
-import { StyleSheet } from "react-native";
+import {
+  Text,
+  Button,
+  View,
+  ScrollView,
+  TextInput,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
+import Loading from "../../assets/images/anime1.gif";
+
+const larguraTela = Dimensions.get("window").width;
+const alturaTela = Dimensions.get("window").height;
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(null);
+  const [listaUFs, setListaUFs] = useState(null);
+  const [termo, setTermo] = useState(""); // Inicialize o estado termo
+  useEffect(retornaListaUFs, []);
 
-  const [listaUFs, setListaUFs] = useState(null)
-  
   function retornaListaUFs() {
+    setIsLoading(true);
     axios
       .get("https://www.devmedia.com.br/projetos-api/ufs", {
         timeout: 30000,
-        //params: {
-        //busca: 'Sa'
-        //}
       })
       .then((resposta) => {
-        setListaUFs(resposta.data)
+        setListaUFs(resposta.data);
+        setIsLoading(false);
       })
       .catch((respostaErro) => {
         if (respostaErro.response) {
-          //bloco que retorna um erro de acordo com o codigo de status enviado pela API
+          setIsLoading(false);
           if (respostaErro.response.status === 404) {
             console.log(respostaErro.response.data.erro);
           } else if (respostaErro.response.status === 500) {
@@ -29,12 +42,9 @@ export default function App() {
             );
           }
         } else {
-          //bloco que retorna uma mensagem caso não exista nenhum erro retornado pela API
           if (respostaErro.request) {
-            if (respostaErro.code === "ECONNABORTED") {//-> N é um cód de status da API nem faz parte do REST
-
-              console.log("Erro de timeout " + respostaErro.message); //personalizando mensagem de erro 
-                                                                      //para casos de timeout
+            if (respostaErro.code === "ECONNABORTED") {
+              console.log("Erro de timeout " + respostaErro.message);
             } else {
               console.log("Erro na requisição " + respostaErro.message);
             }
@@ -45,46 +55,102 @@ export default function App() {
       });
   }
 
-  // const [soma, setSoma] = useState(0);
+  function buscaUFs(termoDigitado) {
+    setTermo(termoDigitado); // Atualize o estado termo
+    if (termoDigitado === "") {
+      setListaUFs(null);
+      return;
+    }
+    setIsLoading(true);
 
-  // function somaNum() {
-  //   let num = setSoma(soma + 1);
-  //   return num;
-  // }
+    axios
+      .get(
+        `https://www.devmedia.com.br/projetos-api/ufs/?busca=${termoDigitado}`,
+        {
+          timeout: 30000,
+        }
+      )
+      .then((response) => {
+        setListaUFs(response.data);
+      }).catch((respostaErro) => {
+      if (respostaErro.response) {
+        if (respostaErro.response.status === 404) {
+          setListaUFs(null);
+          setIsLoading(false);
+        } else if (respostaErro.response.status === 500) {
+          alert("Erro interno no servidor. Tente novamente mais tarde!");
+        }
+      } else {
+        if (respostaErro.request) {
+          if (respostaErro.code === "ECONNABORTED") {
+            alert("Erro de timeout " + respostaErro.message);
+          } else {
+            alert("Erro na requisição " + respostaErro.message);
+          }
+        } else {
+          alert("Erro inesperado " + respostaErro.message);
+        }
+      }
+    });
+  }
 
   return (
-      <ScrollView contentContainerStyle={styles.titleContainer}>
-        {
-          (listaUFs === null) ?
-        <Button title="Listar UFs" onPress={retornaListaUFs}/>
-         :
-            listaUFs.map((uf)=>(
-              <View key={uf.id}>
-                <Text style={styles.text}>{uf.nome}</Text>
-              </View>
-            ))
-          }    
-
-
-        {/* <Button title="Consumir API" onPress={listarUFs} /> */}
-        {/* <Text style={styles.text}>{soma}</Text>
-        <Button title="Somar 1 unidade" onPress={somaNum} /> */}
-
-
-      </ScrollView>
-  )}
+    <View style={styles.Container}>
+      <TextInput
+        style={styles.InputBusca}
+        onChangeText={(termoDigitado) => buscaUFs(termoDigitado)}
+      />
+      {listaUFs !== null ? (
+        <ScrollView>
+          {listaUFs.map((uf) => (
+            <View key={uf.id}>
+              <Text style={styles.text}>{uf.nome}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      ) : (
+        <>
+          {isLoading ? (
+            <Image source={Loading} style={styles.Loading} />
+          ) : (
+            <Button
+              onPress={retornaListaUFs}
+              title="Listar UFs"
+            />
+          )}
+        </>
+      )}
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  Container: {
     alignItems: "center",
-    marginTop: 50,
+    marginTop: 100,
+  },
+  Loading: {
+    position: "absolute",
+    top: alturaTela / 2 - 60,
+    left: larguraTela / 2 - 60,
+    width: 120,
+    height: 120,
   },
   text: {
     color: "white",
     padding: 20,
     fontWeight: "bold",
   },
-  container:{
-    margin: 5
-  }
+  container: {
+    margin: 5,
+  },
+  InputBusca: {
+    borderColor: "white",
+    borderWidth: 1,
+    width: 200,
+    color: "white",
+  },
+  BotaoLista: {
+    fontSize: 10,
+  },
 });
