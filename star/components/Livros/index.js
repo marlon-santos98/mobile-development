@@ -1,11 +1,11 @@
-import { View, ScrollView } from "react-native";
+import {     ScrollView, StyleSheet } from "react-native";
 
 import ItemLivro from "../../components/ItemLivro/index.js";
 
 export default function Livro({itensLivro}){
 
     return(
-        <ScrollView>
+        <ScrollView contentContainerStyle={estilos.container}>
             {
                 itensLivro.map((itemLivro)=>(
                     <ItemLivro
@@ -20,3 +20,11 @@ export default function Livro({itensLivro}){
         </ScrollView>
     )
 }
+
+const estilos = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+  },
+});

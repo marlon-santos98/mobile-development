@@ -3,6 +3,7 @@ import { Text, View, Button } from "react-native";
 
 import CarregaLivros from "../servico/carregaLivros/servico_carregaLivros"
 import Livro from "../components/Livros"
+import  Titulo  from "../../star/components/Header/index";
 
 export default function Index() {
   
@@ -18,10 +19,11 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#FEFEFE"
       }}
     >
+      <Titulo/>
       <Livro itensLivro={itensLivro}/>
-      <Button title="Consumir API" onPress={CarregaLivros}/>
     </View>
   );
 }
