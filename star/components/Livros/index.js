@@ -3,7 +3,6 @@ import {     ScrollView, StyleSheet } from "react-native";
 import ItemLivro from "../../components/ItemLivro/index.js";
 
 export default function Livro({itensLivro}){
-
     return(
         <ScrollView contentContainerStyle={estilos.container}>
             {
@@ -12,7 +11,7 @@ export default function Livro({itensLivro}){
                         key={itemLivro.id}
                         img={itemLivro.volumeInfo.imageLinks?.thumbnail}
                         paginas={itemLivro.volumeInfo.pageCount}
-                        autor={itemLivro.volumeInfo.authors}
+                        autor={itemLivro.volumeInfo.author}
                         titulo={itemLivro.volumeInfo.title}
                     />
                 ))

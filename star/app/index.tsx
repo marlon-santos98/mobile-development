@@ -24,6 +24,7 @@ export default function Index() {
     >
       <Titulo/>
       <Livro itensLivro={itensLivro}/>
+      {/* <ItemDescricao itensLivro={itensLivro}/> */}
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import endpoint_principal from "../../endpoints/endpoints";
+import {endpoint_principal} from "../../endpoints/endpoints"
 import axios from "axios";
 
 function CarregaLivros(setItensLivro){
